@@ -1,9 +1,9 @@
-name: Releases
+name: Temp Check
 
 on:
   push:
-    tags:
-      - "*"
+    branches:
+      - master
 
 jobs:
   build:
