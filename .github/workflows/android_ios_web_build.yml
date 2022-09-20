@@ -55,7 +55,7 @@ jobs:
       #     tag: v1.0.${{ github.run_number }}
       #     token: ${{ secrets.WORKFLOW_TOKEN }}
 
-      Push to Releases
+      # Push to Releases
       - uses: actions/checkout@v2
       - name: Create Release
         id: create_release
