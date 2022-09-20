@@ -1,20 +1,29 @@
-name: Temp Check
-
 on:
   push:
-    branches:
-      - master
+    # Sequence of patterns matched against refs/tags
+    tags:
+      - "v*" # Push events to matching v*, i.e. v1.0, v20.15.10
+
+name: Create Release
 
 jobs:
   build:
+    name: Create Release
     runs-on: ubuntu-latest
-
     steps:
-      - uses: actions/checkout@v2
-      - uses: ncipollo/release-action@v1
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Create release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.WORKFLOW_TOKEN }} # This token is provided by Actions, you do not need to create your own token
         with:
-          artifacts: "text.txt"
-          bodyFile: "body.md"
-          tag: "*"
-          # tag: ${{ github.run_number }}
-          token: ${{ secrets.WORKFLOW_TOKEN }}
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }}
+          body: |
+            Changes in this Release
+            - First Change
+            - Second Change
+          draft: true
+          prerelease: false
