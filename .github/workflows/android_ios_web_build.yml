@@ -2,6 +2,8 @@ name: Web, Android, iOS Build
 
 on:
   push:
+    tags:
+      - v1.0.${{ github.run_number }}
     branches:
       - master
 jobs:
@@ -86,9 +88,9 @@ jobs:
       # - run: |
       #     cd build/web
       #     git init
-      #     # type configurations: your user.email and user.name followed lines 
-      #     # git config --global user.email your_email 
-      #     # git config --global user.name your_name 
+      #     # type configurations: your user.email and user.name followed lines
+      #     # git config --global user.email your_email
+      #     # git config --global user.name your_name
       #     git config --global user.email "sabikrahat72428@gmail.com"
       #     git config --global user.name "Md. Sabik Alam Rahat"
       #     git status
