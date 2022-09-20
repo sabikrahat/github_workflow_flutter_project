@@ -15,7 +15,6 @@ jobs:
         with:
           artifacts: "text.txt"
           bodyFile: "body.md"
-          tag:
-            - "*"
+          tag: "*"
           # tag: ${{ github.run_number }}
           token: ${{ secrets.WORKFLOW_TOKEN }}
