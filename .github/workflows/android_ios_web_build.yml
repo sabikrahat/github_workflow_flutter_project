@@ -55,30 +55,30 @@ jobs:
       #     tag: v1.0.${{ github.run_number }}
       #     token: ${{ secrets.WORKFLOW_TOKEN }}
 
-      # Push to Releases
-      # - uses: actions/checkout@v2
-      # - name: Create Release
-      #   id: create_release
-      #   uses: actions/create-release@v1
-      #   env:
-      #     GITHUB_TOKEN: ${{ secrets.WORKFLOW_TOKEN }} # This token is provided by Actions, you do not need to create your own token
-      #   with:
-      #     tag_name: ${{ github.run_number }}
-      #     release_name: Release ${{ github.run_number }}
-      #     # body: |
-      #     #   Changes in this Release
-      #     #   - First Change
-      #     #   - Second Change
-      #     draft: false
-      #     prerelease: false
+      Push to Releases
+      - uses: actions/checkout@v2
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1.1.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.WORKFLOW_TOKEN }} # This token is provided by Actions, you do not need to create your own token
+        with:
+          tag_name: ${{ github.run_number }}
+          release_name: Release ${{ github.run_number }}
+          # body: |
+          #   Changes in this Release
+          #   - First Change
+          #   - Second Change
+          draft: false
+          prerelease: false
 
       # release
-      - uses: actions/upload-artifact@v3
-        with:
-          name: v1.0.${{ github.run_number }}
-          # path: "build/app/outputs/apk/debug/*, build/ios/iphoneos/app.ipa" # or path/to/artifact
-          path: "test.txt"
-          if-no-files-found: error # 'warn' or 'ignore' are also available, defaults to `warn`
+      # - uses: actions/upload-artifact@v3
+      #   with:
+      #     name: v1.0.${{ github.run_number }}
+      #     # path: "build/app/outputs/apk/debug/*, build/ios/iphoneos/app.ipa" # or path/to/artifact
+      #     path: "test.txt"
+      #     if-no-files-found: error # 'warn' or 'ignore' are also available, defaults to `warn`
 
       # Flutter web release command.
       # - run: flutter build web --web-renderer html --release
