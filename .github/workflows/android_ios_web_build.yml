@@ -53,7 +53,7 @@ jobs:
       ###############################################
 
       # Upload generated apk & ipa to the release by artifacts.
-      - name: Push to Releases
+      # - name: Push to Releases
       - uses: ncipollo/release-action@v1
         with:
           # artifacts: "build/app/outputs/apk/debug/*, build/ios/iphoneos/app.ipa"
