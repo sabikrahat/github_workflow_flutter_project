@@ -2,8 +2,6 @@ name: Web, Android, iOS Build
 
 on:
   push:
-    tags:
-      - v1.0.${{ github.run_number }}
     branches:
       - master
 jobs:
@@ -16,7 +14,7 @@ jobs:
     runs-on: macos-latest
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
       # # Setup Java environment in order to build the Android app.
       # - uses: actions/setup-java@v3
@@ -51,7 +49,6 @@ jobs:
       # Upload generated apk to the artifacts.
       - name: Push to Releases
         uses: ncipollo/release-action@v1
-
         with:
           # artifacts: "build/app/outputs/apk/debug/*, build/ios/iphoneos/app.ipa"
           artifacts: "text.txt"
