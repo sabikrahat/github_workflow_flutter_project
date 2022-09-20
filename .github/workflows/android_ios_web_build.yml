@@ -14,7 +14,7 @@ jobs:
     runs-on: macos-latest
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v2
 
       # # Setup Java environment in order to build the Android app.
       # - uses: actions/setup-java@v3
@@ -47,30 +47,31 @@ jobs:
       #     zip -r app.ipa Payload
 
       # Upload generated apk to the artifacts.
-      # - name: Push to Releases
-      #   uses: ncipollo/release-action@v1
+      - name: Push to Releases
+        uses: ncipollo/release-action@v1
 
-      #   with:
-      #     artifacts: "build/app/outputs/apk/debug/*, build/ios/iphoneos/app.ipa"
-      #     tag: v1.0.${{ github.run_number }}
-      #     token: ${{ secrets.WORKFLOW_TOKEN }}
+        with:
+          # artifacts: "build/app/outputs/apk/debug/*, build/ios/iphoneos/app.ipa"
+          artifacts: "text.txt"
+          tag: v1.0.${{ github.run_number }}
+          token: ${{ secrets.WORKFLOW_TOKEN }}
 
       # Push to Releases
-      - uses: actions/checkout@v2
-      - name: Create Release
-        id: create_release
-        uses: actions/create-release@v1.1.0
-        env:
-          GITHUB_TOKEN: ${{ secrets.WORKFLOW_TOKEN }} # This token is provided by Actions, you do not need to create your own token
-        with:
-          tag_name: ${{ github.run_number }}
-          release_name: Release ${{ github.run_number }}
-          # body: |
-          #   Changes in this Release
-          #   - First Change
-          #   - Second Change
-          draft: false
-          prerelease: false
+      # - uses: actions/checkout@v2
+      # - name: Create Release
+      #   id: create_release
+      #   uses: actions/create-release@v1.1.0
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.WORKFLOW_TOKEN }} # This token is provided by Actions, you do not need to create your own token
+      #   with:
+      #     tag_name: ${{ github.run_number }}
+      #     release_name: Release ${{ github.run_number }}
+      #     # body: |
+      #     #   Changes in this Release
+      #     #   - First Change
+      #     #   - Second Change
+      #     draft: false
+      #     prerelease: false
 
       # release
       # - uses: actions/upload-artifact@v3
