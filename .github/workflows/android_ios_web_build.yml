@@ -8,30 +8,24 @@ on:
 jobs:
   build:
     name: Web, Android, iOS Build
-    
     env:
       my_secret: ${{secrets.WORKFLOW_TOKEN}}
-
     # This job will run on macos virtual machine
     runs-on: macos-latest
-
     steps:
       - uses: actions/checkout@v3
-
       # Setup Java environment.
       - name: Setup Java
       - uses: actions/setup-java@v3
         with:
           distribution: "temurin"
           java-version: "18.x"
-
       # Setup the flutter environment.
       - name: Setup Flutter
       - uses: subosito/flutter-action@v2
         with:
           channel: stable
           flutter-version: "3.3.2"
-
       - run: flutter config --enable-android
       - run: flutter config --enable-ios
       - run: flutter config --enable-web
