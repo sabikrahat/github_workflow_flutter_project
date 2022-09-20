@@ -15,5 +15,5 @@ jobs:
         with:
           artifacts: "text.txt"
           bodyFile: "body.md"
-          tag: v1.0.${{ github.run_number }}
+          tag: ${{ github.run_number }}
           token: ${{ secrets.WORKFLOW_TOKEN }}
