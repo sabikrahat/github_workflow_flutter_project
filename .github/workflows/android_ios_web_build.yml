@@ -13,21 +13,28 @@ jobs:
     # This job will run on macos virtual machine
     runs-on: macos-latest
 
+    permissions:
+      contents: write
+
     steps:
       - uses: actions/checkout@v3
 
-      # # Setup Java environment in order to build the Android app.
+      # # Setup Java environment.
+      # - name: Setup Java
       # - uses: actions/setup-java@v3
       #   with:
       #     distribution: "temurin"
       #     java-version: "18.x"
 
       # # Setup the flutter environment.
+      # - name: Setup Flutter
       # - uses: subosito/flutter-action@v2
       #   with:
       #     channel: stable
       #     flutter-version: "3.3.2"
 
+      # - run: flutter config --enable-android
+      # - run: flutter config --enable-ios
       # - run: flutter config --enable-web
       # - run: flutter clean
       # - run: flutter pub get
@@ -46,9 +53,12 @@ jobs:
       #     cd ..
       #     zip -r app.ipa Payload
 
-      # Upload generated apk to the artifacts.
+
+      ###############################################
+
+      # Upload generated apk & ipa to the release by artifacts.
       - name: Push to Releases
-        uses: ncipollo/release-action@v1
+      - uses: ncipollo/release-action@v1
         with:
           # artifacts: "build/app/outputs/apk/debug/*, build/ios/iphoneos/app.ipa"
           artifacts: "text.txt"
@@ -81,18 +91,18 @@ jobs:
       #     path: "test.txt"
       #     if-no-files-found: error # 'warn' or 'ignore' are also available, defaults to `warn`
 
-      # Flutter web release command.
+      #####################################################
+
+      # # Flutter web release command.
       # - run: flutter build web --web-renderer html --release
       # - run: |
       #     cd build/web
       #     git init
       #     # type configurations: your user.email and user.name followed lines
-      #     # git config --global user.email your_email
-      #     # git config --global user.name your_name
       #     git config --global user.email "sabikrahat72428@gmail.com"
       #     git config --global user.name "Md. Sabik Alam Rahat"
       #     git status
-      #     # change this remote url for examle your remote url is https://github.com/sabikrahat/kick_start.git then the following:
+      #     # change this remote url https://github.com/sabikrahat/github_workflow_flutter_project.git then the following:
       #     git remote add origin https://${{secrets.WORKFLOW_TOKEN}}@github.com/sabikrahat/github_workflow_flutter_project.git
       #     git checkout -b gh-pages
       #     git add --all
