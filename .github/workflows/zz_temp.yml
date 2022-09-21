@@ -22,24 +22,22 @@
 #           overwrite: true
 #           body: "This is my release text"
 
-
 name: Releases
 
 on:
   push:
-    branches:
-      - master
+    tags:
+      - "*"
 
 jobs:
-
   build:
     runs-on: ubuntu-latest
     permissions:
       contents: write
     steps:
-    - uses: actions/checkout@v2
-    - uses: ncipollo/release-action@v1
-      with:
-        artifacts: "zzz_release/yyyy/*.txt"
-        bodyFile: "body.md"
-        token: ${{ secrets.WORKFLOW_TOKEN }}
+      - uses: actions/checkout@v2
+      - uses: ncipollo/release-action@v1
+        with:
+          artifacts: "zzz_release/yyyy/*.txt"
+          bodyFile: "body.md"
+          token: ${{ secrets.WORKFLOW_TOKEN }}
