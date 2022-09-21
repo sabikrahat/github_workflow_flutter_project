@@ -11,7 +11,7 @@ jobs:
 
     env:
       my_repo: "sabikrahat/github_workflow_flutter_project.git"
-      my_secret: ${{secrets.WORKFLOW_TOKEN}}
+      my_secret: "${{secrets.WORKFLOW_TOKEN}}"
       my_email: "sabikrahat72428@gmail.com"
       my_name: "Md. Sabik Alam Rahat"
       my_tag: "v1.0.${{github.run_number}}"
@@ -82,5 +82,5 @@ jobs:
         uses: ncipollo/release-action@v1
         with:
           artifacts: "build/app/outputs/flutter-apk/*,build/ios/iphoneos/app.ipa"
-          tag: "v1.0.${{github.run_number}}"
-          token: ${{secrets.WORKFLOW_TOKEN}}
+          tag: "$my_tag"
+          token: "$my_secret"
