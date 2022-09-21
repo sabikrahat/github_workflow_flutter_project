@@ -69,8 +69,8 @@ jobs:
       # Upload assets to release
       - uses: ncipollo/release-action@v1
         with:
-          # artifacts: "build/app/outputs/flutter-apk/*, build/ios/iphoneos/app.ipa"
-          artifacts: "build/app/outputs/flutter-apk/*"
+          artifacts: "build/app/outputs/flutter-apk/*,build/ios/iphoneos/app.ipa"
+          # artifacts: "build/app/outputs/flutter-apk/*"
           tag: v1.0.${{ github.run_number }}
           token: ${{ secrets.WORKFLOW_TOKEN }}
 
