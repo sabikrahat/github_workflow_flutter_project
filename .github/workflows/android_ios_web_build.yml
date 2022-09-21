@@ -11,6 +11,7 @@ jobs:
 
     env:
       my_secret: ${{secrets.WORKFLOW_TOKEN}}
+      # my_repo: "sabikrahat/github_workflow_flutter_project.git"
 
     # This job will run on macos virtual machine
     runs-on: macos-latest
@@ -19,60 +20,63 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      # Setup Java environment.
-      - name: Setup Java
-        uses: actions/setup-java@v3
-        with:
-          distribution: "zulu"
-          java-version: "18.x"
-
-      # Setup the flutter environment.
-      - name: Setup Flutter
-        uses: subosito/flutter-action@v2
-        with:
-          channel: stable
-          flutter-version: "3.3.2"
-
-      - run: flutter config --enable-android
-      - run: flutter config --enable-ios
-      - run: flutter config --enable-web
-      - run: flutter clean
-      - run: flutter pub get
-
-      # Flutter android apk build command.
-      - run: flutter build apk
-      - run: flutter build apk --split-per-abi
-
-      # Flutter ios ipa build command.
       - run: |
-          flutter build ios --no-codesign
-          cd build/ios/iphoneos
-          mkdir Payload
-          cd Payload
-          ln -s ../Runner.app
-          cd ..
-          zip -r app.ipa Payload
+          echo $my_secret
 
-      # Flutter web release command.
-      - run: flutter build web --web-renderer html --release
-      - run: |
-          cd build/web
-          git init
-          # type configurations: your user.email and user.name followed lines
-          git config --global user.email "sabikrahat72428@gmail.com"
-          git config --global user.name "Md. Sabik Alam Rahat"
-          git status
-          # change this remote url https://github.com/sabikrahat/github_workflow_flutter_project.git then the following:
-          git remote add origin https://${{secrets.WORKFLOW_TOKEN}}@github.com/sabikrahat/github_workflow_flutter_project.git
-          git checkout -b gh-pages
-          git add --all
-          git commit -m "update"
-          git push origin gh-pages -f
+      # # Setup Java environment.
+      # - name: Setup Java
+      #   uses: actions/setup-java@v3
+      #   with:
+      #     distribution: "zulu"
+      #     java-version: "18.x"
 
-      # Upload assets to release
-      - name: Push to Release
-        uses: ncipollo/release-action@v1
-        with:
-          artifacts: "build/app/outputs/flutter-apk/*,build/ios/iphoneos/app.ipa"
-          tag: v1.0.${{ github.run_number }}
-          token: ${{ secrets.WORKFLOW_TOKEN }}
+      # # Setup the flutter environment.
+      # - name: Setup Flutter
+      #   uses: subosito/flutter-action@v2
+      #   with:
+      #     channel: stable
+      #     flutter-version: "3.3.2"
+
+      # - run: flutter config --enable-android
+      # - run: flutter config --enable-ios
+      # - run: flutter config --enable-web
+      # - run: flutter clean
+      # - run: flutter pub get
+
+      # # Flutter android apk build command.
+      # - run: flutter build apk
+      # - run: flutter build apk --split-per-abi
+
+      # # Flutter ios ipa build command.
+      # - run: |
+      #     flutter build ios --no-codesign
+      #     cd build/ios/iphoneos
+      #     mkdir Payload
+      #     cd Payload
+      #     ln -s ../Runner.app
+      #     cd ..
+      #     zip -r app.ipa Payload
+
+      # # Flutter web release command.
+      # - run: flutter build web --web-renderer html --release
+      # - run: |
+      #     cd build/web
+      #     git init
+      #     # type configurations: your user.email and user.name followed lines
+      #     git config --global user.email "sabikrahat72428@gmail.com"
+      #     git config --global user.name "Md. Sabik Alam Rahat"
+      #     git status
+      #     # change this remote url https://github.com/sabikrahat/github_workflow_flutter_project.git then the following:
+      #     git remote add origin https://${{secrets.WORKFLOW_TOKEN}}@github.com/sabikrahat/github_workflow_flutter_project.git
+      #     git checkout -b gh-pages
+      #     git add --all
+      #     git commit -m "update"
+      #     git push origin gh-pages -f
+
+      # # Upload assets to release
+      # - name: Push to Release
+      #   uses: ncipollo/release-action@v1
+      #   with:
+      #     artifacts: "build/app/outputs/flutter-apk/*,build/ios/iphoneos/app.ipa"
+      #     tag: v1.0.${{ github.run_number }}
+      #     token: ${{ secrets.WORKFLOW_TOKEN }}
