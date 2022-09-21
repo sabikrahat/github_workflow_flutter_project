@@ -23,11 +23,11 @@ jobs:
       - name: Checkout code
 
         run: |
-          echo "Github Repo is $github_repo"
-          echo "Github Repo Token is $github_token"
-          echo "Git User Email is $git_user_email"
-          echo "Git User Name is $git_user_name"
-          echo "Release Tag is $release_tag"
+          echo "Github Repo is ${{ env.github_repo }}"
+          echo "Github Repo Token is ${{ env.github_token }}"
+          echo "Git User Email is ${{ env.git_user_email }}"
+          echo "Git User Name is ${{ env.git_user_name }}"
+          echo "Release Tag is ${{ env.release_tag }}"
 
         # Checkout the repository
         uses: actions/checkout@v3
