@@ -1,0 +1,25 @@
+name: Web, Android, iOS Build
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    name: Web, Android, iOS Build
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Build
+        run: cargo build --release
+      - name: Upload binaries to release
+        uses: svenstaro/upload-release-action@v2
+        with:
+          repo_token: ${{ secrets.WORKFLOW_TOKEN }}
+          file: text.txt
+          asset_name: mything
+          tag: ${{ github.run_number }}
+          overwrite: true
+          body: "This is my release text"
