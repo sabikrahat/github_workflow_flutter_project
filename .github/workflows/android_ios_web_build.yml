@@ -11,7 +11,7 @@ jobs:
 
     env:
       my_secret: ${{secrets.WORKFLOW_TOKEN}}
-      # my_repo: "sabikrahat/github_workflow_flutter_project.git"
+      my_repo: "sabikrahat/github_workflow_flutter_project.git"
 
     # This job will run on macos virtual machine
     runs-on: macos-latest
@@ -22,6 +22,7 @@ jobs:
 
       - run: |
           echo $my_secret
+          echo $my_repo
 
       # # Setup Java environment.
       # - name: Setup Java
