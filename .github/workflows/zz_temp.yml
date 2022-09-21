@@ -12,12 +12,18 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
-      - name: Upload binaries to release
-        uses: svenstaro/upload-release-action@v2
+      # - name: Upload binaries to release
+      #   uses: svenstaro/upload-release-action@v2
+      #   with:
+      #     repo_token: ${{ secrets.WORKFLOW_TOKEN }}
+      #     file: zzz_release/
+      #     asset_name: mything
+      #     tag: ${{ github.run_number }}
+      #     overwrite: true
+      #     body: "This is my release text"
+
+      - name: Upload to Artifacts
+        uses: actions/upload-artifact@v3
         with:
-          repo_token: ${{ secrets.WORKFLOW_TOKEN }}
-          file: zzz_release/
-          asset_name: mything
-          tag: ${{ github.run_number }}
-          overwrite: true
-          body: "This is my release text"
+          name: macOS XCODE5 Artifacts
+          path: zzz_release/*
