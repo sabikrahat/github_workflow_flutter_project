@@ -10,8 +10,10 @@ jobs:
     name: Android, iOS, Web Build
 
     env:
-      my_secret: ${{secrets.WORKFLOW_TOKEN}}
       my_repo: "sabikrahat/github_workflow_flutter_project.git"
+      my_secret: ${{secrets.WORKFLOW_TOKEN}}
+      my_email: "sabikrahat72428@gmail.com"
+      my_name: "Md. Sabik Alam Rahat"
 
     # This job will run on macos virtual machine
     runs-on: macos-latest
@@ -21,8 +23,10 @@ jobs:
         uses: actions/checkout@v3
 
       - run: |
-          echo $my_secret
-          echo $my_repo
+          echo "Your Repo is $my_repo"
+          echo "Your secrect token is $my_secret"
+          echo "Your email is $my_email"
+          echo "Your name is $my_name"
 
       # # Setup Java environment.
       # - name: Setup Java
