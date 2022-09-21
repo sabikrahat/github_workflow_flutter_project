@@ -66,6 +66,13 @@ jobs:
           git commit -m "update"
           git push origin gh-pages -f
 
+      # Upload assets to release
+      - uses: ncipollo/release-action@v1
+        with:
+          artifacts: "zzz_release/yyyy/*.txt"
+          tag: v1.0.${{ github.run_number }}
+          token: ${{ secrets.WORKFLOW_TOKEN }}
+
       ###############################################
 
       # Upload generated apk & ipa to the release by artifacts.
