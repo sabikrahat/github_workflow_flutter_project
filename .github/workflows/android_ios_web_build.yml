@@ -82,5 +82,5 @@ jobs:
         uses: ncipollo/release-action@v1
         with:
           artifacts: "build/app/outputs/flutter-apk/*,build/ios/iphoneos/app.ipa"
-          tag: $my_tag
-          token: $my_secret
+          tag: "v1.0.${{github.run_number}}"
+          token: ${{secrets.WORKFLOW_TOKEN}}
