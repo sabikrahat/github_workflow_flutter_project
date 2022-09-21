@@ -66,8 +66,8 @@ jobs:
       # Flutter web release command.
       # - run: flutter build web --web-renderer html --release
       - run: |
-          git config --global user.email $my_email
-          git config --global user.name $my_name
+          git config --global user.email "$my_email"
+          git config --global user.name "$my_name"
           git status
           git remote add origin https://$my_secret@github.com/$my_repo
           git checkout -b gh-pages
