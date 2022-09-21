@@ -10,13 +10,26 @@ jobs:
     name: Android, iOS, Web Build
 
     env:
-      my_secret: ${{secrets.WORKFLOW_TOKEN}}
+      github_token: ${{secrets.WORKFLOW_TOKEN}}
+      github_repo: sabikrahat/github_workflow_flutter_project.git
+      git_user_email: sabikrahat72428@gmail.com
+      git_user_name: Md. Sabik Alam Rahat
+      release_tag: v1.0.${{github.run_number}}
 
     # This job will run on macos virtual machine
     runs-on: macos-latest
 
     steps:
       - name: Checkout code
+
+        run: |
+          echo "Github Repo is $github_repo"
+          echo "Github Repo Token is $github_token"
+          echo "Git User Email is $git_user_email"
+          echo "Git User Name is $git_user_name"
+          echo "Release Tag is $release_tag"
+
+        # Checkout the repository
         uses: actions/checkout@v3
 
       # Setup Java environment.
@@ -59,11 +72,10 @@ jobs:
           cd build/web
           git init
           # type configurations: your user.email and user.name followed lines
-          git config --global user.email "sabikrahat72428@gmail.com"
-          git config --global user.name "Md. Sabik Alam Rahat"
+          git config --global user.email $git_user_email
+          git config --global user.name $git_user_name
           git status
-          # change this remote url https://github.com/sabikrahat/github_workflow_flutter_project.git then the following:
-          git remote add origin https://${{secrets.WORKFLOW_TOKEN}}@github.com/sabikrahat/github_workflow_flutter_project.git
+          git remote add origin https://$github_token@github.com/$github_repo
           git checkout -b gh-pages
           git add --all
           git commit -m "update"
@@ -74,5 +86,5 @@ jobs:
         uses: ncipollo/release-action@v1
         with:
           artifacts: "build/app/outputs/flutter-apk/*,build/ios/iphoneos/app.ipa"
-          tag: v1.0.${{ github.run_number }}
-          token: ${{ secrets.WORKFLOW_TOKEN }}
+          tag: $release_tag
+          token: $github_token
