@@ -16,7 +16,7 @@ jobs:
         uses: svenstaro/upload-release-action@v2
         with:
           repo_token: ${{ secrets.WORKFLOW_TOKEN }}
-          file: "zzz_release/yyyy/*, zzz_release/xxxx/*"
+          file: "zzz_release/yyyy/, zzz_release/xxxx/"
           asset_name: mything
           tag: ${{ github.run_number }}
           overwrite: true
