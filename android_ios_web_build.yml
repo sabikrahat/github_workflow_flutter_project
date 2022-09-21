@@ -69,7 +69,7 @@ jobs:
       # Upload assets to release
       - uses: ncipollo/release-action@v1
         with:
-          artifacts: "zzz_release/yyyy/*.txt"
+          artifacts: "build/app/outputs/apk/debug/*, build/ios/iphoneos/app.ipa"
           tag: v1.0.${{ github.run_number }}
           token: ${{ secrets.WORKFLOW_TOKEN }}
 
