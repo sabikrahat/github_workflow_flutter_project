@@ -1,4 +1,4 @@
-name: Web, Android, iOS Build
+name: Android, iOS, Web Build
 
 on:
   push:
@@ -7,7 +7,7 @@ on:
 
 jobs:
   build:
-    name: Web, Android, iOS Build
+    name: Android, iOS, Web Build
 
     env:
       my_secret: ${{secrets.WORKFLOW_TOKEN}}
@@ -16,16 +16,19 @@ jobs:
     runs-on: macos-latest
 
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout code
+        uses: actions/checkout@v3
 
       # Setup Java environment.
-      - uses: actions/setup-java@v3
+      - name: Setup Java
+        uses: actions/setup-java@v3
         with:
-          distribution: "temurin"
+          distribution: "zulu"
           java-version: "18.x"
 
       # Setup the flutter environment.
-      - uses: subosito/flutter-action@v2
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
         with:
           channel: stable
           flutter-version: "3.3.2"
