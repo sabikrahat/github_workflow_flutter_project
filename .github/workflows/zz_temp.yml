@@ -25,5 +25,5 @@ jobs:
       - name: Upload to Artifacts
         uses: actions/upload-artifact@v3
         with:
-          name: macOS XCODE5 Artifacts
+          name: macOS XCODE5 Artifacts v1.0.${{ github.run_number }}
           path: zzz_release/*
