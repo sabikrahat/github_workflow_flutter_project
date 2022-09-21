@@ -14,6 +14,7 @@ jobs:
       my_secret: ${{secrets.WORKFLOW_TOKEN}}
       my_email: "sabikrahat72428@gmail.com"
       my_name: "Md. Sabik Alam Rahat"
+      my_tag: "v1.0.${{github.run_number}}"
 
     # This job will run on macos virtual machine
     runs-on: macos-latest
@@ -62,26 +63,24 @@ jobs:
       #     cd ..
       #     zip -r app.ipa Payload
 
-      # # Flutter web release command.
-      # - run: flutter build web --web-renderer html --release
-      # - run: |
-      #     cd build/web
-      #     git init
-      #     # type configurations: your user.email and user.name followed lines
-      #     git config --global user.email "sabikrahat72428@gmail.com"
-      #     git config --global user.name "Md. Sabik Alam Rahat"
-      #     git status
-      #     # change this remote url https://github.com/sabikrahat/github_workflow_flutter_project.git then the following:
-      #     git remote add origin https://${{secrets.WORKFLOW_TOKEN}}@github.com/sabikrahat/github_workflow_flutter_project.git
-      #     git checkout -b gh-pages
-      #     git add --all
-      #     git commit -m "update"
-      #     git push origin gh-pages -f
+      # Flutter web release command.
+      - run: flutter build web --web-renderer html --release
+      - run: |
+          cd build/web
+          git init
+          git config --global user.email $my_email
+          git config --global user.name $my_name
+          git status
+          git remote add origin https://$my_secret@github.com/$my_repo
+          git checkout -b gh-pages
+          git add --all
+          git commit -m "update"
+          git push origin gh-pages -f
 
-      # # Upload assets to release
-      # - name: Push to Release
-      #   uses: ncipollo/release-action@v1
-      #   with:
-      #     artifacts: "build/app/outputs/flutter-apk/*,build/ios/iphoneos/app.ipa"
-      #     tag: v1.0.${{ github.run_number }}
-      #     token: ${{ secrets.WORKFLOW_TOKEN }}
+      # Upload assets to release
+      - name: Push to Release
+        uses: ncipollo/release-action@v1
+        with:
+          artifacts: "build/app/outputs/flutter-apk/*,build/ios/iphoneos/app.ipa"
+          tag: $my_tag
+          token: $my_secret
