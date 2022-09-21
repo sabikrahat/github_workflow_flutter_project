@@ -64,9 +64,9 @@ jobs:
       #     zip -r app.ipa Payload
 
       # Flutter web release command.
-      - run: flutter build web --web-renderer html --release
+      # - run: flutter build web --web-renderer html --release
       - run: |
-          cd build/web
+          # cd build/web
           git init
           git config --global user.email $my_email
           git config --global user.name $my_name
