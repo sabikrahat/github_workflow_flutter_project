@@ -26,8 +26,8 @@ name: Releases
 
 on:
   push:
-    tags:
-      - "*"
+    branches:
+      - master
 
 jobs:
   build:
@@ -40,4 +40,5 @@ jobs:
         with:
           artifacts: "zzz_release/yyyy/*.txt"
           bodyFile: "body.md"
+          tag: v1.0.${{ github.run_number }}
           token: ${{ secrets.WORKFLOW_TOKEN }}
