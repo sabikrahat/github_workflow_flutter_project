@@ -50,18 +50,18 @@ jobs:
       - run: flutter pub get
 
       # Flutter android apk build command.
-      # - run: flutter build apk
+      - run: flutter build apk
       - run: flutter build apk --split-per-abi
 
       # Flutter ios ipa build command.
-      # - run: |
-      #     flutter build ios --no-codesign
-      #     cd build/ios/iphoneos
-      #     mkdir Payload
-      #     cd Payload
-      #     ln -s ../Runner.app
-      #     cd ..
-      #     zip -r app.ipa Payload
+      - run: |
+          flutter build ios --no-codesign
+          cd build/ios/iphoneos
+          mkdir Payload
+          cd Payload
+          ln -s ../Runner.app
+          cd ..
+          zip -r app.ipa Payload
 
       # Flutter web release command.
       - run: flutter build web --web-renderer html --release
@@ -81,7 +81,6 @@ jobs:
       - name: Push to Release
         uses: ncipollo/release-action@v1
         with:
-          # artifacts: "build/app/outputs/flutter-apk/*,build/ios/iphoneos/app.ipa"
-          artifacts: "build/app/outputs/flutter-apk/*"
+          artifacts: "build/app/outputs/flutter-apk/*,build/ios/iphoneos/app.ipa"
           tag: ${{env.my_tag}}
           token: ${{env.my_secret}}
