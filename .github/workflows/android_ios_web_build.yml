@@ -83,5 +83,5 @@ jobs:
         with:
           # artifacts: "build/app/outputs/flutter-apk/*,build/ios/iphoneos/app.ipa"
           artifacts: "build/app/outputs/flutter-apk/*"
-          tag: $my_tag
+          tag: "$my_tag"
           token: ${{secrets.WORKFLOW_TOKEN}}
