@@ -45,7 +45,7 @@ jobs:
 
       - run: flutter config --enable-android
       - run: flutter config --enable-ios
-      - run: flutter config --enable-windows
+      - run: flutter config --enable-windows-desktop
       - run: flutter config --enable-web
       - run: flutter clean
       - run: flutter pub get
