@@ -52,6 +52,7 @@ jobs:
       # Flutter android apk build command.
       - run: flutter build apk
       - run: flutter build apk --split-per-abi
+      - run: flutter build appbundle
 
       # Flutter ios ipa build command.
       - run: |
@@ -81,6 +82,6 @@ jobs:
       - name: Push to Release
         uses: ncipollo/release-action@v1
         with:
-          artifacts: "build/app/outputs/flutter-apk/*,build/ios/iphoneos/app.ipa"
+          artifacts: "build/app/outputs/flutter-apk/*,build/ios/iphoneos/app.ipa,build/app/outputs/bundle/release/app-release.aab"
           tag: ${{env.my_tag}}
           token: ${{env.my_secret}}
